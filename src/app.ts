@@ -1,17 +1,21 @@
 import express, { Application, Request, Response, urlencoded } from 'express'
 import cors from 'cors'
+import usersRouter from './app/modules/users.route'
 
 const app: Application = express()
 
 app.use(cors())
 
 //parser
-
 app.use(express.json())
 app.use(urlencoded({ extended: true }))
+// Application routes
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
+app.use('/api/v1/users/', usersRouter)
+
+// Testing
+app.get('/', async (req: Request, res: Response) => {
+  res.send('Working successfully !')
 })
 
 export default app
